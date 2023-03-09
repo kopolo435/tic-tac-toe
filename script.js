@@ -1,9 +1,12 @@
 let Gameboard = (() => {
-   let gameboard = [];
+  let gameboard = [];
 
-
+  return {gameboard}
 })();
 
-function Player(name,mark){
+function Player(name, mark) {
+  const getPLayerName = () => name;
+  const getPlayerMark = () => mark;
 
+  return { getPLayerName, getPlayerMark };
 }

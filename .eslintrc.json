@@ -11,5 +11,14 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-console": "off",
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "prefer-const": ["off", {
+            "destructuring": "any",
+            "ignoreReadBeforeAssign": false
+        }]
     }
 }
