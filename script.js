@@ -18,9 +18,13 @@ let GameMaster = (() => {
 
   let nodeGameBoard = document.querySelectorAll(".block");
   nodeGameBoard.forEach((item) => {
-    item.addEventListener("click", () => {
-      item.textContent = mark;
-      mark = mark === "X" ? "0" : "X";
-    });
+    item.addEventListener(
+      "click",
+      () => {
+        item.textContent = mark;
+        mark = mark === "X" ? "0" : "X";
+      },
+      { once: true }
+    );
   });
 })();
