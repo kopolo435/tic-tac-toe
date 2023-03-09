@@ -12,3 +12,15 @@ body{
 main{
     flex: 1;
 }
+
+.gameBoard{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+}
+
+.block{
+    background-color: black;
+    color: white;
+    height: 100px;
+}
