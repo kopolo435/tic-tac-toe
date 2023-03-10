@@ -4,12 +4,20 @@ let Gameboard = (() => {
   let gameboard = ["","","","","","","","",""];
 
   let updateGameBoard = function (item, mark) {
-    let newBlock = document.createElement("div");
-    newBlock.classList.add("block");
-    newBlock.textContent = mark;
-    item.insertAdjacentElement("afterend", newBlock);
+    gameboard[item.getAttribute("id")] = mark
+    item.insertAdjacentElement("afterend", createNewBlock(item,mark));
     gameBoardContainer.removeChild(item);
   };
+
+  let createNewBlock = function(item,mark){
+    let newBlock = document.createElement("div");
+    let itemId = item.getAttribute("id");
+    newBlock.classList.add("block");
+    newBlock.textContent = mark;
+    newBlock.setAttribute("id",itemId);
+    return newBlock
+  }
+
   return { gameboard, updateGameBoard };
 })();
 
@@ -30,6 +38,7 @@ let GameMaster = (() => {
     item.addEventListener("click", () => {
       Gameboard.updateGameBoard(item, mark);
       mark = mark === "X" ? "0" : "X";
+      console.log(Gameboard.gameboard)
     });
   });
 })();
