@@ -1,6 +1,15 @@
+const gameBoardContainer = document.querySelector(".gameBoard");
+
 let Gameboard = (() => {
   let gameboard = [];
 
+  let updateGameBoard = function (item,mark){
+    let newBlock = document.createElement("div");
+    newBlock.classList.add("block");
+    newBlock.textContent = mark;
+    item.insertAdjacentElement("afterend", newBlock);
+    gameBoardContainer.removeChild(item);
+  }
   return { gameboard };
 })();
 
