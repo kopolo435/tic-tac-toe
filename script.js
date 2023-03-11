@@ -1,10 +1,14 @@
 const gameBoardContainer = document.querySelector(".gameBoard");
 
 let Gameboard = (() => {
-  let gameboard = ["","","","","","","","",""];
+  let boardArray = ["","","","","","","","",""];
+
+  let getBoardArray = function(){
+    return boardArray;
+  }
 
   let updateGameBoard = function (item, mark) {
-    gameboard[item.getAttribute("id")] = mark
+    boardArray[item.getAttribute("id")] = mark
     item.insertAdjacentElement("afterend", createNewBlock(item,mark));
     gameBoardContainer.removeChild(item);
   };
@@ -18,7 +22,7 @@ let Gameboard = (() => {
     return newBlock
   }
 
-  return { gameboard, updateGameBoard };
+  return { getBoardArray, updateGameBoard };
 })();
 
 function Player(name, mark) {
@@ -38,7 +42,7 @@ let GameMaster = (() => {
     item.addEventListener("click", () => {
       Gameboard.updateGameBoard(item, mark);
       mark = mark === "X" ? "0" : "X";
-      console.log(Gameboard.gameboard)
+      console.log(Gameboard.getBoardArray)
     });
   });
 })();
