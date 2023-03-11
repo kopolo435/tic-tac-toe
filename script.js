@@ -41,8 +41,24 @@ let GameMaster = (() => {
   nodeGameBoard.forEach((item) => {
     item.addEventListener("click", () => {
       Gameboard.updateGameBoard(item, mark);
+      checkWin(Gameboard.getBoardArray(), mark);
       mark = mark === "X" ? "0" : "X";
       console.log(Gameboard.getBoardArray);
     });
   });
+
+  let checkWin = function (board, symbol) {
+    if (
+      (board[0] === symbol && board[1] === symbol && board[2] === symbol) ||
+      (board[3] === symbol && board[4] === symbol && board[5] === symbol) ||
+      (board[6] === symbol && board[7] === symbol && board[8] === symbol) ||
+      (board[0] === symbol && board[3] === symbol && board[6] === symbol) ||
+      (board[1] === symbol && board[4] === symbol && board[7] === symbol) ||
+      (board[2] === symbol && board[5] === symbol && board[8] === symbol) ||
+      (board[0] === symbol && board[4] === symbol && board[8] === symbol) ||
+      (board[2] === symbol && board[4] === symbol && board[6] === symbol)
+    ) {
+      console.log(`${symbol  } wins`);
+    }
+  };
 })();
