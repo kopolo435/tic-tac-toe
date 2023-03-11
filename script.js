@@ -40,10 +40,16 @@ let GameMaster = (() => {
   let nodeGameBoard = document.querySelectorAll(".block");
   nodeGameBoard.forEach((item) => {
     item.addEventListener("click", () => {
-      Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark);
-      checkWin(Gameboard.getBoardArray(), currentPlayer.getPlayerMark);
-      currentPlayer = currentPlayer === Player1 ? Player2 : Player1;
-      console.log(Gameboard.getBoardArray);
+      Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
+      if(checkWin(Gameboard.getBoardArray(), currentPlayer.getPlayerMark())){
+        console.log(currentPlayer.getPLayerName+" has won the game");
+      }
+      else if(checkTie(Gameboard.getBoardArray())){
+        console.log("The game has ended in a tie");
+      }
+      else{
+        currentPlayer = currentPlayer === Player1 ? Player2 : Player1;
+      }
     });
   });
 
@@ -61,4 +67,10 @@ let GameMaster = (() => {
       return true
     }
   };
+
+  let checkTie = function(board){
+    if(board.indexOf("")<0){
+      return true
+    }
+  }
 })();
