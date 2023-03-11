@@ -47,16 +47,16 @@ let GameMaster = (() => {
     });
   });
 
-  let checkWin = function (board, symbol) {
+  let checkWin = function (board, mark) {
     if (
-      (board[0] === symbol && board[1] === symbol && board[2] === symbol) ||
-      (board[3] === symbol && board[4] === symbol && board[5] === symbol) ||
-      (board[6] === symbol && board[7] === symbol && board[8] === symbol) ||
-      (board[0] === symbol && board[3] === symbol && board[6] === symbol) ||
-      (board[1] === symbol && board[4] === symbol && board[7] === symbol) ||
-      (board[2] === symbol && board[5] === symbol && board[8] === symbol) ||
-      (board[0] === symbol && board[4] === symbol && board[8] === symbol) ||
-      (board[2] === symbol && board[4] === symbol && board[6] === symbol)
+      (board[0] === mark && board[1] === mark && board[2] === mark) ||
+      (board[3] === mark && board[4] === mark && board[5] === mark) ||
+      (board[6] === mark && board[7] === mark && board[8] === mark) ||
+      (board[0] === mark && board[3] === mark && board[6] === mark) ||
+      (board[1] === mark && board[4] === mark && board[7] === mark) ||
+      (board[2] === mark && board[5] === mark && board[8] === mark) ||
+      (board[0] === mark && board[4] === mark && board[8] === mark) ||
+      (board[2] === mark && board[4] === mark && board[6] === mark)
     ) {
       return true
     }
