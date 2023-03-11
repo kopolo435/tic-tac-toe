@@ -35,14 +35,14 @@ function Player(name, mark) {
 let GameMaster = (() => {
   const Player1 = Player("Player1", "X");
   const Player2 = Player("Player2", "0");
-  let mark = "X";
+  let currentPlayer = Player1;
 
   let nodeGameBoard = document.querySelectorAll(".block");
   nodeGameBoard.forEach((item) => {
     item.addEventListener("click", () => {
-      Gameboard.updateGameBoard(item, mark);
-      checkWin(Gameboard.getBoardArray(), mark);
-      mark = mark === "X" ? "0" : "X";
+      Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark);
+      checkWin(Gameboard.getBoardArray(), currentPlayer.getPlayerMark);
+      currentPlayer = currentPlayer === Player1 ? Player2 : Player1;
       console.log(Gameboard.getBoardArray);
     });
   });
@@ -58,7 +58,7 @@ let GameMaster = (() => {
       (board[0] === symbol && board[4] === symbol && board[8] === symbol) ||
       (board[2] === symbol && board[4] === symbol && board[6] === symbol)
     ) {
-      console.log(`${symbol  } wins`);
+      return true
     }
   };
 })();
