@@ -32,7 +32,14 @@ let Gameboard = (() => {
     });
   };
 
-  return { getBoardArray, updateGameBoard, showFinalBoard };
+  let cleanBoard = function(nodeArray){
+    nodeArray.forEach(node =>{
+      node.textContent="";
+      boardArray[node.getAttribute("id")] = "";
+    })
+  }
+
+  return { getBoardArray, updateGameBoard, showFinalBoard, cleanBoard };
 })();
 
 function Player(name, mark) {
@@ -86,4 +93,9 @@ let GameMaster = (() => {
       gameStatus();
     });
   });
+
+  let gameRestart = function(){
+
+  }
+
 })();
