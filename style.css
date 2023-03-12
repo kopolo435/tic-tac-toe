@@ -33,5 +33,9 @@ main{
 .block{
     background-color: white;
     border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
     color: red;
 }
