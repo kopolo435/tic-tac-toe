@@ -32,12 +32,12 @@ let Gameboard = (() => {
     });
   };
 
-  let cleanBoard = function(nodeArray){
-    nodeArray.forEach(node =>{
-      node.textContent="";
+  let cleanBoard = function (nodeArray) {
+    nodeArray.forEach((node) => {
+      node.textContent = "";
       boardArray[node.getAttribute("id")] = "";
-    })
-  }
+    });
+  };
 
   return { getBoardArray, updateGameBoard, showFinalBoard, cleanBoard };
 })();
@@ -87,15 +87,22 @@ let GameMaster = (() => {
     }
   };
 
-  nodeGameBoard.forEach((item) => {
-    item.addEventListener("click", () => {
-      Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
-      gameStatus();
+  let gameStart = function(){
+    nodeGameBoard.forEach((item) => {
+      item.addEventListener("click", () => {
+        Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
+        gameStatus();
+      });
     });
-  });
-
-  let gameRestart = function(){
-
   }
 
+
+  let gameRestart = function () {
+    Gameboard.cleanBoard();
+    
+  };
+
+  return{gameStart}
 })();
+
+GameMaster.gameStart();
