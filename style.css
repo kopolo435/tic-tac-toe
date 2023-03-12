@@ -27,7 +27,7 @@ main{
     grid-template-columns: repeat(3,1fr);
     height: max(400px,50%);
     gap: 10px;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem max(1rem,15vw);
 }
 
 .block{
