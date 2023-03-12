@@ -22,7 +22,17 @@ let Gameboard = (() => {
     return newBlock;
   };
 
-  return { getBoardArray, updateGameBoard };
+  let showFinalBoard = function (nodeArray) {
+    nodeArray.forEach((node) => {
+      node.insertAdjacentElement(
+        "afterend",
+        createNewBlock(node, boardArray[node.getAttribute("id")])
+      );
+      gameBoardContainer.removeChild(node);
+    });
+  };
+
+  return { getBoardArray, updateGameBoard, showFinalBoard };
 })();
 
 function Player(name, mark) {
@@ -38,20 +48,6 @@ let GameMaster = (() => {
   let currentPlayer = Player1;
 
   let nodeGameBoard = document.querySelectorAll(".block");
-  nodeGameBoard.forEach((item) => {
-    item.addEventListener("click", () => {
-      Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
-      if(checkWin(Gameboard.getBoardArray(), currentPlayer.getPlayerMark())){
-        console.log(currentPlayer.getPLayerName+" has won the game");
-      }
-      else if(checkTie(Gameboard.getBoardArray())){
-        console.log("The game has ended in a tie");
-      }
-      else{
-        currentPlayer = currentPlayer === Player1 ? Player2 : Player1;
-      }
-    });
-  });
 
   let checkWin = function (board, mark) {
     if (
@@ -64,13 +60,30 @@ let GameMaster = (() => {
       (board[0] === mark && board[4] === mark && board[8] === mark) ||
       (board[2] === mark && board[4] === mark && board[6] === mark)
     ) {
-      return true
+      return true;
     }
   };
 
-  let checkTie = function(board){
-    if(board.indexOf("")<0){
-      return true
+  let checkTie = function (board) {
+    return board.indexOf("") < 0;
+  };
+
+  let gameStatus = function () {
+    if (checkWin(Gameboard.getBoardArray(), currentPlayer.getPlayerMark())) {
+      console.log(`${currentPlayer.getPLayerName()} has won the game`);
+      nodeGameBoard = document.querySelectorAll(".block");
+      Gameboard.showFinalBoard(nodeGameBoard);
+    } else if (checkTie(Gameboard.getBoardArray())) {
+      console.log("The game has ended in a tie");
+    } else {
+      currentPlayer = currentPlayer === Player1 ? Player2 : Player1;
     }
-  }
+  };
+
+  nodeGameBoard.forEach((item) => {
+    item.addEventListener("click", () => {
+      Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
+      gameStatus();
+    });
+  });
 })();
