@@ -38,4 +38,9 @@ main{
     justify-content: center;
     align-items: center;
     font-size: 5rem;
+    color: #ff0000;
+}
+
+.textBlockBlue{
+    color: #0000ff;
 }
