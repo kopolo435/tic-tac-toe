@@ -3,7 +3,8 @@ const nameBtn = document.querySelector("#nameBtn");
 const ply1Name = document.querySelector("#player1");
 const play2Name = document.querySelector("#player2");
 const startBtn  =document.querySelector("#startBtn");
-
+const restartBtn = document.querySelector("#restartBtn")
+let nodeGameBoard = document.querySelectorAll(".block");
 let Gameboard = (() => {
   let boardArray = ["", "", "", "", "", "", "", "", ""];
 
@@ -20,10 +21,10 @@ let Gameboard = (() => {
   let createNewBlock = function (item, mark) {
     let newBlock = document.createElement("div");
     let itemId = item.getAttribute("id");
-    let text = document.createElement("p");
+    // let text = document.createElement("p");
     if (mark === "0") newBlock.classList.add("textBlockBlue");
-    text.textContent = mark;
-    newBlock.appendChild(text);
+    newBlock.textContent = mark;
+    // newBlock.appendChild(text);
     newBlock.classList.add("block");
     newBlock.setAttribute("id", itemId);
     return newBlock;
@@ -40,8 +41,9 @@ let Gameboard = (() => {
   };
 
   let cleanBoard = function (nodeArray) {
-    nodeArray.forEach((node) => {
-      node.textContent = "";
+    nodeArray.forEach(node => {
+      node.textContent = " ";
+      restartBtn.textContent = " ";
       boardArray[node.getAttribute("id")] = "";
     });
   };
@@ -60,8 +62,6 @@ let GameMaster = (() => {
   // const Player1 = Player("Player1", "X");
   // const Player2 = Player("Player2", "0");
   // let currentPlayer = Player1;
-
-  let nodeGameBoard = document.querySelectorAll(".block");
 
   let checkWin = function (board, mark) {
     if (
@@ -111,7 +111,7 @@ let GameMaster = (() => {
   };
 
   return { gameStart };
-})();
+})(nodeGameBoard);
 let Player1;
 let Player2;
 nameBtn.addEventListener("click",()=>{
@@ -122,5 +122,10 @@ nameBtn.addEventListener("click",()=>{
 
 startBtn.addEventListener("click", () =>{
   GameMaster.gameStart(Player1,Player2);
+  restartBtn.disabled = false;
+})
+
+restartBtn.addEventListener("click", () =>{
+  Gameboard.cleanBoard(document.querySelectorAll(".block"));
 })
 
