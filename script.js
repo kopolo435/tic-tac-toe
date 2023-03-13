@@ -2,8 +2,8 @@ const gameBoardContainer = document.querySelector(".gameBoard");
 const nameBtn = document.querySelector("#nameBtn");
 const ply1Name = document.querySelector("#player1");
 const play2Name = document.querySelector("#player2");
-const startBtn  =document.querySelector("#startBtn");
-const restartBtn = document.querySelector("#restartBtn")
+const startBtn = document.querySelector("#startBtn");
+const restartBtn = document.querySelector("#restartBtn");
 let nodeGameBoard = document.querySelectorAll(".block");
 let Gameboard = (() => {
   let boardArray = ["", "", "", "", "", "", "", "", ""];
@@ -21,10 +21,8 @@ let Gameboard = (() => {
   let createNewBlock = function (item, mark) {
     let newBlock = document.createElement("div");
     let itemId = item.getAttribute("id");
-    // let text = document.createElement("p");
     if (mark === "0") newBlock.classList.add("textBlockBlue");
     newBlock.textContent = mark;
-    // newBlock.appendChild(text);
     newBlock.classList.add("block");
     newBlock.setAttribute("id", itemId);
     return newBlock;
@@ -41,7 +39,7 @@ let Gameboard = (() => {
   };
 
   let cleanBoard = function (nodeArray) {
-    nodeArray.forEach(node => {
+    nodeArray.forEach((node) => {
       node.textContent = " ";
       restartBtn.textContent = " ";
       boardArray[node.getAttribute("id")] = "";
@@ -59,10 +57,6 @@ function Player(name, mark) {
 }
 
 let GameMaster = (() => {
-  // const Player1 = Player("Player1", "X");
-  // const Player2 = Player("Player2", "0");
-  // let currentPlayer = Player1;
-
   let checkWin = function (board, mark) {
     if (
       (board[0] === mark && board[1] === mark && board[2] === mark) ||
@@ -82,7 +76,7 @@ let GameMaster = (() => {
     return board.indexOf("") < 0;
   };
 
-  let gameStatus = function (Player1,Player2,currentPlayer) {
+  let gameStatus = function (Player1, Player2, currentPlayer) {
     if (checkWin(Gameboard.getBoardArray(), currentPlayer.getPlayerMark())) {
       console.log(`${currentPlayer.getPLayerName()} has won the game`);
       nodeGameBoard = document.querySelectorAll(".block");
@@ -95,12 +89,12 @@ let GameMaster = (() => {
     }
   };
 
-  let gameStart = function (Player1,Player2) {
+  let gameStart = function (Player1, Player2) {
     let currentPlayer = Player1;
     nodeGameBoard.forEach((item) => {
       item.addEventListener("click", () => {
         Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
-        currentPlayer = gameStatus(Player1,Player2,currentPlayer);
+        currentPlayer = gameStatus(Player1, Player2, currentPlayer);
       });
     });
   };
@@ -114,18 +108,17 @@ let GameMaster = (() => {
 })(nodeGameBoard);
 let Player1;
 let Player2;
-nameBtn.addEventListener("click",()=>{
-  Player1 = Player(ply1Name.value,"X");
-  Player2 = Player(play2Name.value,"0");
-  startBtn.disabled =false;
-})
+nameBtn.addEventListener("click", () => {
+  Player1 = Player(ply1Name.value, "X");
+  Player2 = Player(play2Name.value, "0");
+  startBtn.disabled = false;
+});
 
-startBtn.addEventListener("click", () =>{
-  GameMaster.gameStart(Player1,Player2);
+startBtn.addEventListener("click", () => {
+  GameMaster.gameStart(Player1, Player2);
   restartBtn.disabled = false;
-})
+});
 
-restartBtn.addEventListener("click", () =>{
+restartBtn.addEventListener("click", () => {
   Gameboard.cleanBoard(document.querySelectorAll(".block"));
-})
-
+});
