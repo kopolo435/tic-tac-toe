@@ -10,6 +10,23 @@ body{
     background-color:azure;
 }
 
+header{
+    padding: 0.3rem 1rem;
+}
+
+header form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+header fieldset{
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
 main{
     flex: 1;
     display: flex;
