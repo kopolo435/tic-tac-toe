@@ -1,4 +1,8 @@
 const gameBoardContainer = document.querySelector(".gameBoard");
+const nameBtn = document.querySelector("#nameBtn");
+const ply1Name = document.querySelector("#player1");
+const play2Name = document.querySelector("#player2");
+const startBtn  =document.querySelector("#startBtn");
 
 let Gameboard = (() => {
   let boardArray = ["", "", "", "", "", "", "", "", ""];
@@ -53,9 +57,9 @@ function Player(name, mark) {
 }
 
 let GameMaster = (() => {
-  const Player1 = Player("Player1", "X");
-  const Player2 = Player("Player2", "0");
-  let currentPlayer = Player1;
+  // const Player1 = Player("Player1", "X");
+  // const Player2 = Player("Player2", "0");
+  // let currentPlayer = Player1;
 
   let nodeGameBoard = document.querySelectorAll(".block");
 
@@ -78,7 +82,7 @@ let GameMaster = (() => {
     return board.indexOf("") < 0;
   };
 
-  let gameStatus = function () {
+  let gameStatus = function (Player1,Player2,currentPlayer) {
     if (checkWin(Gameboard.getBoardArray(), currentPlayer.getPlayerMark())) {
       console.log(`${currentPlayer.getPLayerName()} has won the game`);
       nodeGameBoard = document.querySelectorAll(".block");
@@ -87,14 +91,16 @@ let GameMaster = (() => {
       console.log("The game has ended in a tie");
     } else {
       currentPlayer = currentPlayer === Player1 ? Player2 : Player1;
+      return currentPlayer;
     }
   };
 
-  let gameStart = function () {
+  let gameStart = function (Player1,Player2) {
+    let currentPlayer = Player1;
     nodeGameBoard.forEach((item) => {
       item.addEventListener("click", () => {
         Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
-        gameStatus();
+        currentPlayer = gameStatus(Player1,Player2,currentPlayer);
       });
     });
   };
@@ -106,5 +112,15 @@ let GameMaster = (() => {
 
   return { gameStart };
 })();
+let Player1;
+let Player2;
+nameBtn.addEventListener("click",()=>{
+  Player1 = Player(ply1Name.value,"X");
+  Player2 = Player(play2Name.value,"0");
+  startBtn.disabled =false;
+})
 
-GameMaster.gameStart();
+startBtn.addEventListener("click", () =>{
+  GameMaster.gameStart(Player1,Player2);
+})
+
