@@ -41,7 +41,6 @@ let Gameboard = (() => {
   let cleanBoard = function (nodeArray) {
     nodeArray.forEach((node) => {
       node.textContent = " ";
-      restartBtn.textContent = " ";
       boardArray[node.getAttribute("id")] = "";
     });
   };
@@ -91,6 +90,7 @@ let GameMaster = (() => {
 
   let gameStart = function (Player1, Player2) {
     let currentPlayer = Player1;
+    nodeGameBoard = document.querySelectorAll(".block");
     nodeGameBoard.forEach((item) => {
       item.addEventListener("click", () => {
         Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
@@ -117,8 +117,10 @@ nameBtn.addEventListener("click", () => {
 startBtn.addEventListener("click", () => {
   GameMaster.gameStart(Player1, Player2);
   restartBtn.disabled = false;
+  startBtn.disabled = true;
 });
 
 restartBtn.addEventListener("click", () => {
   Gameboard.cleanBoard(document.querySelectorAll(".block"));
+  GameMaster.gameStart(Player1,Player2);
 });
