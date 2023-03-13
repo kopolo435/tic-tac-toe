@@ -16,8 +16,11 @@ let Gameboard = (() => {
   let createNewBlock = function (item, mark) {
     let newBlock = document.createElement("div");
     let itemId = item.getAttribute("id");
+    let text = document.createElement("p");
+    if (mark === "0") newBlock.classList.add("textBlockBlue");
+    text.textContent = mark;
+    newBlock.appendChild(text);
     newBlock.classList.add("block");
-    newBlock.textContent = mark;
     newBlock.setAttribute("id", itemId);
     return newBlock;
   };
@@ -87,22 +90,21 @@ let GameMaster = (() => {
     }
   };
 
-  let gameStart = function(){
+  let gameStart = function () {
     nodeGameBoard.forEach((item) => {
       item.addEventListener("click", () => {
         Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
         gameStatus();
       });
     });
-  }
-
+  };
 
   let gameRestart = function () {
     Gameboard.cleanBoard();
-    
+    gameStart();
   };
 
-  return{gameStart}
+  return { gameStart };
 })();
 
 GameMaster.gameStart();
