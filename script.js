@@ -4,6 +4,7 @@ const ply1Name = document.querySelector("#player1");
 const play2Name = document.querySelector("#player2");
 const startBtn = document.querySelector("#startBtn");
 const restartBtn = document.querySelector("#restartBtn");
+const gameEnd = document.querySelector(".gamedEnd");
 let nodeGameBoard = document.querySelectorAll(".block");
 let Gameboard = (() => {
   let boardArray = ["", "", "", "", "", "", "", "", ""];
@@ -78,6 +79,8 @@ let GameMaster = (() => {
   let gameStatus = function (Player1, Player2, currentPlayer) {
     if (checkWin(Gameboard.getBoardArray(), currentPlayer.getPlayerMark())) {
       console.log(`${currentPlayer.getPLayerName()} has won the game`);
+      let winnerText = gameEnd.querySelector("p");
+      winnerText.textContent = `${currentPlayer.getPLayerName()} has won the game`;
       nodeGameBoard = document.querySelectorAll(".block");
       Gameboard.showFinalBoard(nodeGameBoard);
     } else if (checkTie(Gameboard.getBoardArray())) {
