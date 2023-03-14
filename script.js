@@ -105,16 +105,6 @@ let GameMaster = (() => {
       });
     });
   };
-
-  // let gameRestart = function () {
-  //   let infoCurrentPly = currentPlyText.querySelector("p");
-  //   let winnerText = gameEnd.querySelector("p");
-  //   winnerText.textContent = "";
-  //   infoCurrentPly.textContent = "Current Player: "
-  //   Gameboard.cleanBoard();
-  //   gameStart();
-  // };
-
   return { gameStart };
 })(nodeGameBoard);
 
