@@ -106,13 +106,19 @@ let GameMaster = (() => {
     });
   };
 
-  let gameRestart = function () {
-    Gameboard.cleanBoard();
-    gameStart();
-  };
+  // let gameRestart = function () {
+  //   let infoCurrentPly = currentPlyText.querySelector("p");
+  //   let winnerText = gameEnd.querySelector("p");
+  //   winnerText.textContent = "";
+  //   infoCurrentPly.textContent = "Current Player: "
+  //   Gameboard.cleanBoard();
+  //   gameStart();
+  // };
 
   return { gameStart };
 })(nodeGameBoard);
+
+
 let Player1;
 let Player2;
 nameBtn.addEventListener("click", () => {
@@ -128,6 +134,10 @@ startBtn.addEventListener("click", () => {
 });
 
 restartBtn.addEventListener("click", () => {
+  let infoCurrentPly = currentPlyText.querySelector("p");
+  let winnerText = gameEnd.querySelector("p");
+  winnerText.textContent = "";
+  infoCurrentPly.textContent = "Current Player: "
   Gameboard.cleanBoard(document.querySelectorAll(".block"));
   GameMaster.gameStart(Player1, Player2);
 });
