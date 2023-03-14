@@ -4,6 +4,7 @@ const ply1Name = document.querySelector("#player1");
 const play2Name = document.querySelector("#player2");
 const startBtn = document.querySelector("#startBtn");
 const restartBtn = document.querySelector("#restartBtn");
+const currentPlyText = document.querySelector(".currentPly");
 const gameEnd = document.querySelector(".gamedEnd");
 let nodeGameBoard = document.querySelectorAll(".block");
 let Gameboard = (() => {
@@ -93,11 +94,14 @@ let GameMaster = (() => {
 
   let gameStart = function (Player1, Player2) {
     let currentPlayer = Player1;
+    let infoCurrentPly = currentPlyText.querySelector("p");
+    infoCurrentPly.textContent = `Current Player: ${currentPlayer.getPLayerName()}`;
     nodeGameBoard = document.querySelectorAll(".block");
     nodeGameBoard.forEach((item) => {
       item.addEventListener("click", () => {
         Gameboard.updateGameBoard(item, currentPlayer.getPlayerMark());
         currentPlayer = gameStatus(Player1, Player2, currentPlayer);
+        infoCurrentPly.textContent = `Current Player: ${currentPlayer.getPLayerName()}`;
       });
     });
   };
@@ -125,5 +129,5 @@ startBtn.addEventListener("click", () => {
 
 restartBtn.addEventListener("click", () => {
   Gameboard.cleanBoard(document.querySelectorAll(".block"));
-  GameMaster.gameStart(Player1,Player2);
+  GameMaster.gameStart(Player1, Player2);
 });
